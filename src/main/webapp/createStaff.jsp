@@ -21,6 +21,15 @@
     </style>
 </head>
 <body>
+<div class="card text-center">
+    <div class="card-header">
+        <ul class="nav nav-pills card-header-pills">
+            <li class="nav-item">
+                <a class="nav-link active" href="StaffServlet?action=null">Home</a>
+            </li>
+        </ul>
+    </div>
+</div>
 <form name="myForm" method="post" onsubmit="return validateForm()">
     <table class="table table-striped">
         <thead>
@@ -44,9 +53,12 @@
             <td><input type="text" name="address" value="" required/></td>
             <td><input type="text" name="phoneNumber" value="" required/></td>
             <td><input type="text" name="salary" value="" required/></td>
+            <td><input type="hidden" name="sizeListDepartment" value="${departmentList.size()}"/></td>
             <td><select name="idDepartment">
                 <c:forEach items="${departmentList}" var="department">
+                    <c:if test="${department.status == 1}">
                     <option value="${department.idDepartment}">${department.nameDepartment}</option>
+                    </c:if>
                 </c:forEach>
             </select></td>
             <td><input type="submit" value="Create"></td>
@@ -58,6 +70,7 @@
             <td></td>
             <td><span id="phoneError" class="error"></span></td>
             <td><span id="salaryError" class="error"></span></td>
+            <td><span id="department" class="error"></span></td>
             <td></td>
             <td></td>
         </tr>
