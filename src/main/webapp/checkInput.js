@@ -3,8 +3,8 @@ function validateForm() {
     let regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     let regexPhone = /^0\d{9}$/;
     let regexSalary = /^(?!0)\d*\.?0?$/;
-    let regexSize = /^0$/
-    let size = document.forms["myForm"]["sizeListDepartment"].value;
+    let regexSize = /^0$/;
+    let sizeList = document.forms["myForm"]["sizeListDepartment"].value;
     let username = document.forms["myForm"]["name"].value;
     let email = document.forms["myForm"]["email"].value;
     let phone = document.forms["myForm"]["phoneNumber"].value;
@@ -34,7 +34,7 @@ function validateForm() {
     } else {
         document.getElementById("salaryError").innerHTML = "";
     }
-    if (regexSize.test(size)) {
+    if (regexSize.test(sizeList)) {
         document.getElementById("department").innerHTML = "Bạn chưa có phòng ban";
         isValid = false;
     } else {

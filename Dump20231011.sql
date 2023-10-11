@@ -25,8 +25,9 @@ DROP TABLE IF EXISTS `department`;
 CREATE TABLE `department` (
   `idDepartment` int NOT NULL AUTO_INCREMENT,
   `nameDepartment` varchar(45) NOT NULL,
+  `status` int NOT NULL,
   PRIMARY KEY (`idDepartment`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,7 +36,7 @@ CREATE TABLE `department` (
 
 LOCK TABLES `department` WRITE;
 /*!40000 ALTER TABLE `department` DISABLE KEYS */;
-INSERT INTO `department` VALUES (1,'Kinh doanh'),(2,'Rnd'),(3,'Bảo vệ');
+INSERT INTO `department` VALUES (1,'Giam doc',1),(2,'Rnd',1),(3,'Bao an',1),(4,'Lao cong',1),(5,'Con giam doc',0);
 /*!40000 ALTER TABLE `department` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -52,12 +53,12 @@ CREATE TABLE `staff` (
   `email` varchar(45) NOT NULL,
   `address` varchar(200) NOT NULL,
   `phoneNumber` varchar(20) NOT NULL,
-  `salary` double NOT NULL,
+  `salary` longblob NOT NULL,
   `idDepartment` int NOT NULL,
   PRIMARY KEY (`idStaff`),
   KEY `Fk1_idx` (`idDepartment`),
   CONSTRAINT `Fk1` FOREIGN KEY (`idDepartment`) REFERENCES `department` (`idDepartment`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +67,7 @@ CREATE TABLE `staff` (
 
 LOCK TABLES `staff` WRITE;
 /*!40000 ALTER TABLE `staff` DISABLE KEYS */;
-INSERT INTO `staff` VALUES (18,'141221','1412421','1421241','23122',1241242,2),(19,'1242112','1412','4221412','1421422',1421,3),(20,'Hadz','100','123','1234567890',1234567,1),(21,'Nguyá»n Tháº¿ HÃ ','100','123','12344',12421421,3),(22,'Hadz','123','321','123456789',123445,1),(23,'datdz','321','3124','4543145',454355353453,3),(24,'longdz','123','1343','13344',2244444,2);
+INSERT INTO `staff` VALUES (68,'Hadz','nguyenha210895@gmail.com','123','0348233198',_binary '1234567.0',2),(69,'Datdz','123@gmail.com','234','0348965789',_binary '123456.0',5),(70,'Longdz','nguyenha210895@gmail.com','Trung PhÃÂÃÂ¡ÃÂÃÂ»ÃÂÃÂ¥ng, ÃÂÃÂÃÂÃÂÃÂÃÂ¡ÃÂÃÂ»ÃÂÃÂng ÃÂÃÂÃÂÃÂa, HÃÂÃÂÃÂÃÂ  NÃÂÃÂ¡ÃÂÃÂ»ÃÂÃÂi','0123456789',_binary '123456.0',5);
 /*!40000 ALTER TABLE `staff` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -79,4 +80,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-10 12:40:31
+-- Dump completed on 2023-10-11 13:53:29
