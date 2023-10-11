@@ -32,7 +32,7 @@
         <tbody>
         <tr>
             <td>${department.idDepartment}</td>
-            <td><input type="text" name="name" value="" required/></td>
+            <td><input type="text" name="name" value="${department.nameDepartment}" required/></td>
             <td><input type="hidden" name="status" value="${department.status}"/></td>
             <td><input type="submit" value="Save"></td>
         </tr>
