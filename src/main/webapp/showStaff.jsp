@@ -30,6 +30,7 @@
     </tr>
     </thead>
     <tbody>
+    <c:if test="${staffList.size() != 0}">
     <c:forEach var="i" begin="0" end="${staffList.size()-1}">
     <tr>
         <td>${staffList.get(i).idStaff}</td>
@@ -43,12 +44,11 @@
         <td><a href="StaffServlet?action=delete&idDelete=${staffList.get(i).idStaff}">delete</a></td>
     </tr>
     </c:forEach>
+    </c:if>
     </tbody>
 </table>
-
 <h2><a href="StaffServlet?action=create">Create new Staff</a> </h2>
 <h2><a href="StaffServlet?action=findByName">Find by name</a> </h2>
-
-
 </body>
 </html>
+

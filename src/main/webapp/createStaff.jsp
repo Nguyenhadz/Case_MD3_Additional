@@ -13,9 +13,15 @@
 <html>
 <head>
     <title>Title</title>
+    <script type="text/javascript" src="checkInput.js" ></script>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
 </head>
 <body>
-<form method="post">
+<form name="myForm" method="post" onsubmit="return validateForm()">
     <table class="table table-striped">
         <thead>
         <tr>
@@ -35,7 +41,7 @@
             <td>${staff.idStaff}</td>
             <td><input type="text" name="name" value="" required/></td>
             <td><input type="text" name="email" value="" required/></td>
-            <td><input type="text" name="address" value=""required/></td>
+            <td><input type="text" name="address" value="" required/></td>
             <td><input type="text" name="phoneNumber" value="" required/></td>
             <td><input type="text" name="salary" value="" required/></td>
             <td><select name="idDepartment">
@@ -44,6 +50,16 @@
                 </c:forEach>
             </select></td>
             <td><input type="submit" value="Create"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><span id="usernameError" class="error"></span></td>
+            <td><span id="emailError" class="error"></span></td>
+            <td></td>
+            <td><span id="phoneError" class="error"></span></td>
+            <td><span id="salaryError" class="error"></span></td>
+            <td></td>
+            <td></td>
         </tr>
         </tbody>
     </table>
