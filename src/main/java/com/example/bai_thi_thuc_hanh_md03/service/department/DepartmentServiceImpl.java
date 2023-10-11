@@ -26,7 +26,8 @@ public class DepartmentServiceImpl implements DepartmentService{
             while (rs.next()) {
                 int idDepartment = rs.getInt("idDepartment");
                 String nameDepartment = rs.getString("nameDepartment");
-                departmentList.add(new Department(idDepartment, nameDepartment));
+                int status = rs.getInt("status");
+                departmentList.add(new Department(idDepartment, nameDepartment, status));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -36,17 +37,43 @@ public class DepartmentServiceImpl implements DepartmentService{
 
     @Override
     public void create(Department department) throws SQLException {
-
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("insert into department(nameDepartment, status) values (?, ?)");) {
+            preparedStatement.setString(1, department.getNameDepartment());
+            preparedStatement.setInt(2, department.getStatus());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public boolean update(Department department) throws SQLException {
-        return false;
+        boolean rowUpdate;
+        try {
+            Connection connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement("update department set nameDepartment= ?where idDepartment = ?");
+            statement.setString(1, department.getNameDepartment());
+            statement.setInt(2, department.getIdDepartment());
+            rowUpdate = statement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return rowUpdate;
     }
 
     @Override
-    public boolean delete(int id) throws SQLException {
-        return false;
+    public boolean delete(int id){
+        boolean rowDelete;
+        try {
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("update department set status= 0 where idDepartment = ?");
+            preparedStatement.setInt(1, id);
+            rowDelete = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return rowDelete;
     }
 
     @Override
@@ -59,7 +86,8 @@ public class DepartmentServiceImpl implements DepartmentService{
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int idDepartment = rs.getInt("idDepartment");
-                departmentList.add(new Department(idDepartment, name));
+                int status = rs.getInt("status");
+                departmentList.add(new Department(idDepartment, name, status));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -77,7 +105,8 @@ public class DepartmentServiceImpl implements DepartmentService{
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 String name = rs.getString("nameDepartment");
-                department = new Department(id, name);
+                int status = rs.getInt("status");
+                department = new Department(id, name, status);
             }
         } catch (SQLException e) {
             e.printStackTrace();

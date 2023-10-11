@@ -93,8 +93,10 @@ public class StaffServlet extends HttpServlet {
     private void showListStaff(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Staff> staffList = staffService.findAll();
         List<Department> departmentList = findAllDepartment(staffList);
+        List<Department> departmentAllList = departmentService.findAll();
         request.setAttribute("staffList", staffList);
         request.setAttribute("departmentList", departmentList);
+        request.setAttribute("departmentAllList", departmentAllList);
         request.getRequestDispatcher("showStaff.jsp").forward(request, response);
     }
 
@@ -140,6 +142,8 @@ public class StaffServlet extends HttpServlet {
         String searchStaff = request.getParameter("searchStaff");
         List<Staff> staffList = staffService.findAllToSearch(searchStaff);
         List<Department> departmentList = findAllDepartment(staffList);
+        List<Department> departmentAllList = departmentService.findAll();
+        request.setAttribute("departmentAllList", departmentAllList);
         request.setAttribute("staffList", staffList);
         request.setAttribute("departmentList", departmentList);
         request.getRequestDispatcher("showStaff.jsp").forward(request, response);
@@ -152,8 +156,6 @@ public class StaffServlet extends HttpServlet {
         String phoneNumber = request.getParameter("phoneNumber");
         double salary = Double.parseDouble(request.getParameter("salary"));
         int idDepartment = Integer.parseInt(request.getParameter("idDepartment"));
-
-
         staffService.create(new Staff(name, email, address, phoneNumber, salary, idDepartment));
         showListStaff(request, response);
     }
