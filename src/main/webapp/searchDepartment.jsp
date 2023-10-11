@@ -27,7 +27,7 @@
         </thead>
         <tbody>
         <tr>
-            <td><input type="text" name="searchStaff"/></td>
+            <td><input type="text" name="searchDepartment"/></td>
         </tr>
         <tr>
             <td>

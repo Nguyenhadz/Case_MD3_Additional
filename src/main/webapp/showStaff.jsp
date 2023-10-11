@@ -15,11 +15,34 @@
     <title>Title</title>
 </head>
 <body>
+
+<div class="card text-center">
+    <div class="card-header">
+        <ul class="nav nav-pills card-header-pills">
+            <li class="nav-item">
+                <a class="nav-link active" href="StaffServlet?action=null">Home</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<h4 style="color: red; text-align: left; margin-top: 15px">Danh sách nhân viên</h4>
+<div class="card text-center">
+    <div class="card-header">
+        <ul class="nav nav-pills card-header-pills">
+            <li class="nav-item">
+                <a class="nav-link" href="StaffServlet?action=create">Create New Staff</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="StaffServlet?action=findByName">Find By Name</a>
+            </li>
+        </ul>
+    </div>
+</div>
 <table class="table table-striped">
     <thead>
     <tr>
         <th scope="col">#</th>
-        <th scope="col">Name</th>
+        <th scope="col">Name Staff</th>
         <th scope="col">Email</th>
         <th scope="col">Address</th>
         <th scope="col">Phone Number</th>
@@ -47,8 +70,66 @@
     </c:if>
     </tbody>
 </table>
-<h2><a href="StaffServlet?action=create">Create new Staff</a> </h2>
-<h2><a href="StaffServlet?action=findByName">Find by name</a> </h2>
+<hr>
+<h4 style="color: red; text-align: left">Danh sách phòng ban</h4>
+<div class="card text-center">
+    <div class="card-header">
+        <ul class="nav nav-pills card-header-pills">
+            <li class="nav-item">
+                <a class="nav-link" href="DepartmentServlet?action=create">Create new department</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="DepartmentServlet?action=findByName">Find By Name</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<table class="table table-striped" style="width: 50%">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name Department</th>
+    </tr>
+    </thead>
+    <tbody>
+    <c:if test="${departmentAllList.size() != 0}">
+        <c:forEach var="i" begin="0" end="${departmentAllList.size()-1}">
+            <c:if test="${departmentAllList.get(i).status == 1}">
+            <tr>
+                <td>${departmentAllList.get(i).idDepartment}</td>
+                <td>${departmentAllList.get(i).nameDepartment}</td>
+                <td><a href="DepartmentServlet?action=editDepartment&id=${departmentAllList.get(i).idDepartment}">Edit</a></td>
+                <td><a href="DepartmentServlet?action=deleteDepartment&idDelete=${departmentAllList.get(i).idDepartment}">Delete</a></td>
+            </tr>
+            </c:if>
+        </c:forEach>
+    </c:if>
+    </tbody>
+</table>
+<hr>
+<h4 style="color: red; text-align: left">Danh sách phòng ban đã xoá</h4>
+<table class="table table-striped" style="width: 40%">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name Department</th>
+    </tr>
+    </thead>
+    <tbody>
+    <c:if test="${departmentAllList.size() != 0}">
+        <c:forEach var="i" begin="0" end="${departmentAllList.size()-1}">
+            <c:if test="${departmentAllList.get(i).status == 0}">
+                <tr>
+                    <td>${departmentAllList.get(i).idDepartment}</td>
+                    <td>${departmentAllList.get(i).nameDepartment}</td>
+                    <td><a href="DepartmentServlet?action=restoreDepartment&id=${departmentAllList.get(i).idDepartment}">Restore</a></td>
+                </tr>
+            </c:if>
+        </c:forEach>
+    </c:if>
+    </tbody>
+</table>
 </body>
 </html>
 
