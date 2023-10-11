@@ -75,6 +75,28 @@
 </table>
 <h2><a href="DepartmentServlet?action=create">Create new department</a> </h2>
 <h2><a href="DepartmentServlet?action=findByName">Find by name</a> </h2>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name Department</th>
+    </tr>
+    </thead>
+    <tbody>
+    <c:if test="${departmentAllList.size() != 0}">
+        <c:forEach var="i" begin="0" end="${departmentAllList.size()-1}">
+            <c:if test="${departmentAllList.get(i).status == 0}">
+                <tr>
+                    <td>${departmentAllList.get(i).idDepartment}</td>
+                    <td>${departmentAllList.get(i).nameDepartment}</td>
+                    <td><a href="DepartmentServlet?action=restoreDepartment&id=${departmentAllList.get(i).idDepartment}">Restore</a></td>
+                </tr>
+            </c:if>
+        </c:forEach>
+    </c:if>
+    </tbody>
+</table>
 </body>
 </html>
 

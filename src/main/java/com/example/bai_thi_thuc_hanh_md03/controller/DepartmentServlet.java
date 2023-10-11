@@ -35,11 +35,28 @@ public class DepartmentServlet extends HttpServlet {
                 case "create":
                     showCreateDepartment(request, response);
                     break;
+                case "findByName":
+                    showFindByName(request, response);
+                    break;
+                case "restoreDepartment":
+                    restoreDepartment(request, response);
+                    break;
                 default:
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void restoreDepartment(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        departmentService.restore(id);
+        response.sendRedirect("StaffServlet?action=null");
+    }
+
+    private void showFindByName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("searchDepartment.jsp");
+        requestDispatcher.forward(request, response);
     }
 
     private void showCreateDepartment(HttpServletRequest request, HttpServletResponse response) {
@@ -84,12 +101,35 @@ public class DepartmentServlet extends HttpServlet {
                 case "create":
                     createDepartment(request, response);
                     break;
+                case "findByName":
+                    findDepartment(request, response);
+                    break;
                 default:
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
+    }
+
+    private void findDepartment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String searchDepartment = request.getParameter("searchDepartment");
+        List<Staff> staffList = staffService.findAll();
+        List<Department> departmentList = findAllDepartment(staffList);
+        List<Department> departmentAllList = departmentService.findAllToSearch(searchDepartment);
+        request.setAttribute("departmentAllList", departmentAllList);
+        request.setAttribute("staffList", staffList);
+        request.setAttribute("departmentList", departmentList);
+        request.getRequestDispatcher("showStaff.jsp").forward(request, response);
+    }
+
+    private List<Department> findAllDepartment(List<Staff> staffList) {
+        List<Department> departmentList = new ArrayList<>();
+        for (Staff staff : staffList) {
+            Department department = departmentService.findById(staff.getIdDepartment());
+            departmentList.add(department);
+        }
+        return departmentList;
     }
 
     private void createDepartment(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {

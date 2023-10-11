@@ -113,6 +113,36 @@ public class DepartmentServiceImpl implements DepartmentService{
         }
         return department;
     }
+    public List<Department> findAllToSearch(String searchDepartment) {
+        List<Department> departmentList = new ArrayList<>();
+        try {
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from department where nameDepartment like ?");
+            preparedStatement.setString(1, "%" + searchDepartment + "%");
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("idDepartment");
+                String name = rs.getString("nameDepartment");
+                int status = rs.getInt("status");
+                departmentList.add(new Department(id, name, status));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return departmentList;
+    }
+    public boolean restore(int id) throws SQLException {
+        boolean rowRestore;
+        try {
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("update department set status = 1 where idDepartment = ?;");
+            preparedStatement.setInt(1, id);
+            rowRestore = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return rowRestore;
+    }
 
 
 }
