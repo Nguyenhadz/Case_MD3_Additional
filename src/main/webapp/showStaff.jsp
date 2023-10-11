@@ -15,6 +15,29 @@
     <title>Title</title>
 </head>
 <body>
+
+<div class="card text-center">
+    <div class="card-header">
+        <ul class="nav nav-pills card-header-pills">
+            <li class="nav-item">
+                <a class="nav-link active" href="StaffServlet?action=null">Home</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<h4 style="color: red; text-align: left; margin-top: 15px">Danh sách nhân viên</h4>
+<div class="card text-center">
+    <div class="card-header">
+        <ul class="nav nav-pills card-header-pills">
+            <li class="nav-item">
+                <a class="nav-link" href="StaffServlet?action=create">Create New Staff</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="StaffServlet?action=findByName">Find By Name</a>
+            </li>
+        </ul>
+    </div>
+</div>
 <table class="table table-striped">
     <thead>
     <tr>
@@ -47,11 +70,22 @@
     </c:if>
     </tbody>
 </table>
-<h2><a href="StaffServlet?action=create">Create new Staff</a> </h2>
-<h2><a href="StaffServlet?action=findByName">Find by name</a> </h2>
-<h2><a href="StaffServlet?action=null">Home</a> </h2>
+<hr>
+<h4 style="color: red; text-align: left">Danh sách phòng ban</h4>
+<div class="card text-center">
+    <div class="card-header">
+        <ul class="nav nav-pills card-header-pills">
+            <li class="nav-item">
+                <a class="nav-link" href="DepartmentServlet?action=create">Create new department</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="DepartmentServlet?action=findByName">Find By Name</a>
+            </li>
+        </ul>
+    </div>
+</div>
 
-<table class="table table-striped">
+<table class="table table-striped" style="width: 50%">
     <thead>
     <tr>
         <th scope="col">#</th>
@@ -73,10 +107,9 @@
     </c:if>
     </tbody>
 </table>
-<h2><a href="DepartmentServlet?action=create">Create new department</a> </h2>
-<h2><a href="DepartmentServlet?action=findByName">Find by name</a> </h2>
-
-<table class="table table-striped">
+<hr>
+<h4 style="color: red; text-align: left">Danh sách phòng ban đã xoá</h4>
+<table class="table table-striped" style="width: 40%">
     <thead>
     <tr>
         <th scope="col">#</th>

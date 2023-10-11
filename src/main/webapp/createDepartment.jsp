@@ -15,6 +15,15 @@
     <title>Title</title>
 </head>
 <body>
+<div class="card text-center">
+    <div class="card-header">
+        <ul class="nav nav-pills card-header-pills">
+            <li class="nav-item">
+                <a class="nav-link active" href="StaffServlet?action=null">Home</a>
+            </li>
+        </ul>
+    </div>
+</div>
 <form name="myForm" method="post" onsubmit="return validateForm()">
     <table style="width: 500px; height: 100px" class="table table-striped">
         <thead>
